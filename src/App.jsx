@@ -12,7 +12,7 @@ import { Routes, Route } from "react-router-dom";
 function App() {
   return (
    
-   <div className = "w-full h-screen border-10 bg-ascent">
+   <div className = "w-full h-screen border-10">
     <Routes>
       <Route path="/" element={<HomePage/>} />
       <Route path="/login" element={<LoginPage/>} />
