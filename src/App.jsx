@@ -12,12 +12,12 @@ import { Routes, Route } from "react-router-dom";
 function App() {
   return (
    
-   <div className = "w-full h-screen border-10">
+   <div className = "w-full h-screen border-10 bg-ascent">
     <Routes>
       <Route path="/" element={<HomePage/>} />
       <Route path="/login" element={<LoginPage/>} />
       <Route path= "/register" element={<RegisterPage/>} />
-      <Route path= "/admin" element={<AdminPage/>} />
+      <Route path= "/admin/*" element={<AdminPage/>} />
       <Route path= "/test" element={<TestPage/>} />
 
     </Routes>
