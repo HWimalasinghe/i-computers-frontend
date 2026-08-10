@@ -1,21 +1,65 @@
+import {useEffect, useState} from "react";
+import { toast } from "react-hot-toast";
+
 export default function TestPage() {
 
-    let status = "Off";
+    const [status, setStatus] = useState("Off");
+    const [level, setLevel] = useState(0);
 
     return(
         <div className="flex w-full h-full flex-col items-center justify-center">
             <h1 className="text-3xl font-bold">{status}</h1>
+            
             <div className="flex justify-center items-center w-75 h-[50px]">
 
                 <button onClick={
                     ()=>{
-                        status = "On";
+                        setStatus ("On")
                         console.log(status)
+                        toast.success("Status changed to On")
                     }
                 } className="p-2 text-white bg-green-600 m-2">Turn on</button>
-                <button className="p-2 text-white bg-red-600 m-2">Turn off</button>
-                <button className="p-2 text-white bg-yellow-600 m-2">Idle</button>
+                <button onClick={
+                    ()=>{
+                        setStatus ("Off")
+                        console.log(status)
+                        toast.error("Status changed to Off")
+                    }
+                } className="p-2 text-white bg-red-600 m-2">Turn off</button>
+                <button onClick={
+                    ()=>{
+                        setStatus("Idle")
+                        console.log(status)
+                        toast.success("Status changed to Idle")
+                    }
+                } className="p-2 text-white bg-yellow-600 m-2">Idle</button>
 
+            </div>
+
+            <h1 className="text-3xl font-bold">{level}</h1>
+            
+            <div className="flex flex-col justify-center items-center bg-amber-200">
+                <div className=" w-75 h-[50px] flex justify-center items-center">
+                    <button onClick={
+                        ()=>{
+                            setLevel(1)
+                        }
+                    } className="p-2 text-white bg-blue-600 m-2">1</button>
+                </div>
+                <div className="w-75 h-[50px] flex justify-center items-center">
+                    <button onClick={
+                        ()=>{
+                            setLevel(2)
+                        }
+                    } className="p-2 text-white bg-yellow-600 m-2">2</button>
+                </div>
+                <div className="w-75 h-[50px] flex justify-center items-center">
+                    <button onClick={
+                        ()=>{
+                            setLevel(3)
+                        }
+                    } className="p-2 text-white bg-red-600 m-2">3</button>
+                </div>
             </div>
         </div>
     )
