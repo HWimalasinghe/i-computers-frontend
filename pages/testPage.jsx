@@ -38,22 +38,22 @@ export default function TestPage() {
 
             <h1 className="text-3xl font-bold">{level}</h1>
             
-            <div className="flex flex-col justify-center items-center bg-amber-200">
-                <div className=" w-75 h-[50px] flex justify-center items-center">
+            <div className="flex flex-col items-center justify-between bg-amber-400 w-75">
+                <div className=" w-25 h-[50px] flex justify-center items-center">
                     <button onClick={
                         ()=>{
                             setLevel(1)
                         }
                     } className="p-2 text-white bg-blue-600 m-2">1</button>
                 </div>
-                <div className="w-75 h-[50px] flex justify-center items-center">
+                <div className="w-25 h-[50px] flex justify-center items-center">
                     <button onClick={
                         ()=>{
                             setLevel(2)
                         }
                     } className="p-2 text-white bg-yellow-600 m-2">2</button>
                 </div>
-                <div className="w-75 h-[50px] flex justify-center items-center">
+                <div className="w-25 h-[50px] flex justify-center items-center">
                     <button onClick={
                         ()=>{
                             setLevel(3)
