@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import axios from "axios";
+import api from "../lib/api";
 
 
 export default function LoginPage() {
@@ -11,15 +12,27 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
 
     function handleLogin(){
-        axios.post("http://localhost:3000/users/login",
+
+        // axios.post("http://localhost:3000/users/login",
+        //     {
+        //         email: email,
+        //         password: password
+        //     }
+        // )
+
+        api.post("/users/login",
             {
                 email: email,
                 password: password
             }
         ).then(
             (res)=>{
-                // toast.success("Login successful")
-                console.log(res.data)
+                toast.success("Login successful")
+                console.log(res.data.token)
+                console.log(res.data.isAdmin)
+
+                //browser store
+                localStorage.setItem("token", res.data.token)
             }
         ).catch(
             (err)=>{
