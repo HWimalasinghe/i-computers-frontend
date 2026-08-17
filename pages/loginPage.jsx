@@ -59,6 +59,7 @@ export default function LoginPage() {
 
                 <label className="text-lg font-medium text-secondary w-full">Email</label>
                 <input 
+                value={email}
                 onChange={
                     (e)=>{
                         setEmail(e.target.value)
@@ -68,6 +69,7 @@ export default function LoginPage() {
 
                 <label className="text-lg font-medium text-secondary w-full">Password</label>
                 <input 
+                value={password}
                 onChange={
                     (e)=>{
                         setPassword(e.target.value)

@@ -15,53 +15,41 @@ export default function RegisterPage() {
     const [confirmPassword, setConfirmPassword] = useState("")
     const navigate = useNavigate()
 
-    function handleLogin(){
+    function handleRegister(){
 
-        // axios.post("http://localhost:3000/users/login",
-        //     {
-        //         email: email,
-        //         password: password
-        //     }
-        // )
-
-        api.post("/users/login",
+        if(password !== confirmPassword){
+            toast.error("Password do not match")
+        }
+        api.post("/users/",
             {
                 email: email,
+                firstName:firstName,
+                lastName: lastName,
                 password: password
             }
         ).then(
             (res)=>{
-                console.log("Login response:", res.data);
-                toast.success("Login successful")
-            
-                //browser store
-                localStorage.setItem("token", res.data.token)
-                if(res.data.isAdmin){
-                    //admin dashboard
-                    //window.location.href = "/admin"
-                    navigate("/admin")
-                }else{
-                    //home page
-                    //window.location.href = "/"
-                    navigate("/")
-                }
+                
+                toast.success("Register Successfully")
+                navigate("/login")
             }
         ).catch(
             (err)=>{
-                toast.error("Login failed")
-                toast.error("login failed")
+                console.log(err)
+                toast.error("Registration faild")
             }
         )
     }
 
     return(
         <div className="w-full h-full bg-[url('/bg.jpg')] bg-cover bg-center flex justify-center items-center">
-            <div className="flex flex-col items-center w-[450px] h-[550px] backdrop-blur-md shadow-2xl rounded-lg p-6">
+            <div className="flex flex-col items-center w-[450px] backdrop-blur-md shadow-2xl rounded-lg p-6">
                 <img src="/logo.png" className="w-[120px] h-[100px] object-cover bg-ascent rounded-lg"></img>
                 <h1 className="text-3xl font-bold text-secondary">Login</h1>
 
                 <label className="text-lg font-medium text-secondary w-full">Email</label>
                 <input 
+                value={email}
                 onChange={
                     (e)=>{
                         setEmail(e.target.value)
@@ -69,8 +57,35 @@ export default function RegisterPage() {
                 }
                 type="email" placeholder="user@gmail.com" className="w-full h-[40px] rounded-lg p-2 mb-2 bg-secondary-20 border-2 border-ascent-300 outline-none text-secondary "></input>
 
+                <div className="w-full flex gap-2">
+                    <div className="w-1/2 flex flex-col">
+                        <label className="w-full text-lg text-secondary font-semibold mb-1">First Name</label>
+                        <input
+                            value={firstName}
+                            onChange={
+                                (e)=>{
+                                    setFirstName(e.target.value)
+                                }
+                            }
+                        type="email" placeholder="enter first name" className="w-full h-[40px] rounded-lg p-2 mb-2 bg-secondary-20 border-2 border-ascent-300 outline-none text-secondary "></input>
+                    </div>
+                    
+                    <div className="w-1/2 flex flex-col">
+                        <label className="w-full text-lg text-secondary font-semibold mb-1">Last Name</label>
+                        <input
+                            value={lastName}
+                            onChange={
+                                (e)=>{
+                                    setLastName(e.target.value)
+                                }
+                            }
+                        type="email" placeholder="enter last name" className="w-full h-[40px] rounded-lg p-2 mb-2 bg-secondary-20 border-2 border-ascent-300 outline-none text-secondary "></input>
+                    </div>
+                </div>
+
                 <label className="text-lg font-medium text-secondary w-full">Password</label>
                 <input 
+                value={password}
                 onChange={
                     (e)=>{
                         setPassword(e.target.value)
@@ -78,13 +93,21 @@ export default function RegisterPage() {
                 }
                 type="password" placeholder="••••••••" className="w-full h-[40px] rounded-lg p-2 mb-2 bg-secondary-20 border-2 border-ascent-300 outline-none text-secondary "></input>
 
-                <p className="w-full text-end">Forget Password reset <Link to="/reset_password" className="text-ascent">here</Link></p>
+                <label className="text-lg font-medium text-secondary w-full">Confirm Password</label>
+                <input 
+                value={confirmPassword}
+                onChange={
+                    (e)=>{
+                        setConfirmPassword(e.target.value)
+                    }
+                }
+                type="password" placeholder="••••••••" className="w-full h-[40px] rounded-lg p-2 mb-2 bg-secondary-20 border-2 border-ascent-300 outline-none text-secondary "></input>
 
-                <button onClick={handleLogin} className="w-full h-[40px] rounded-lg p-2 mb-2 bg-ascent text-white font-bold" type="submit">Login</button>
+                <button onClick={handleRegister} className="w-full h-[40px] rounded-lg p-2 mb-2 bg-ascent text-white font-bold" type="submit">Register</button>
 
-                <p className="w-full text-end">Do not have an account? <Link to="/register" className="text-ascent">Sign up</Link></p>
+                <p className="w-full text-end">Already have an account? <Link to="/login" className="text-ascent">Login</Link></p>
 
-                <button className="w-full h-[40px] rounded-lg p-2 mb-2 bg-ascent text-white font-bold flex justify-center items-center gap-2"><FcGoogle />Login with Google</button>
+                <button className="w-full h-[40px] rounded-lg p-2 mb-2 bg-ascent text-white font-bold flex justify-center items-center gap-2"><FcGoogle />Register with Google</button>
 
 
             </div>
